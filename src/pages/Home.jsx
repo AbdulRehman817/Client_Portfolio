@@ -6,6 +6,10 @@ import {
   Share2,
   Megaphone,
   ArrowRight,
+  MessageSquare,
+  Lightbulb,
+  Paintbrush,
+  Rocket,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import servicesPackages from "../assets/services-packages.png";
@@ -41,6 +45,37 @@ const Home = () => {
       description:
         "Strategic planning to position your brand, reach your audience, and achieve your business goals.",
       slug: "digital-strategy",
+    },
+  ];
+
+  const steps = [
+    {
+      number: "01",
+      icon: MessageSquare,
+      title: "Discovery Call",
+      description:
+        "We start with a free consultation to understand your goals, challenges, and vision for the project.",
+    },
+    {
+      number: "02",
+      icon: Lightbulb,
+      title: "Strategy & Planning",
+      description:
+        "I create a detailed project plan with timelines, milestones, and deliverables tailored to your needs.",
+    },
+    {
+      number: "03",
+      icon: Paintbrush,
+      title: "Design & Development",
+      description:
+        "I bring your vision to life with iterative design and development, keeping you involved every step.",
+    },
+    {
+      number: "04",
+      icon: Rocket,
+      title: "Launch & Support",
+      description:
+        "After thorough testing, we launch your project and I provide ongoing support to ensure success.",
     },
   ];
 
@@ -121,11 +156,11 @@ const Home = () => {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4 mb-12">
               <button className="flex items-center gap-2 px-8 py-4 bg-[#E53935] text-white rounded-lg text-lg hover:bg-[#E53935]/90 transition">
-                Book a Free Call
+                Book a Free 1:1 Discovery Call
                 <ArrowRight className="w-5 h-5" />
               </button>
 
-              <button className="px-8 py-4 border border-[#2A2A2A] text-white rounded-lg text-lg hover:bg-[#1A1A1A] transition">
+              <button className="px-12 py-2 border-2 border-[#999999]/30 text-white rounded-lg text-lg hover:border-[#4B8BF5] hover:text-[#4B8BF5] transition   transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer ">
                 View My Work
               </button>
             </div>
@@ -204,6 +239,64 @@ const Home = () => {
                 className="w-full rounded-2xl border border-border"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= HOW IT WORKS ================= */}
+      <section id="process" className="py-24 bg-[#0a0a0a]">
+        <div className="container mx-auto px-6">
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
+              How It Works
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4 text-[#fafafa]">
+              A simple process for{" "}
+              <span className="text-[#4B8BF5]">great results</span>
+            </h2>
+            <p className="text-lg" style={{ color: "#a1a1aa" }}>
+              I've refined my workflow to make collaboration smooth and
+              efficient. Here's what working with me looks like.
+            </p>
+          </div>
+
+          {/* Steps */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div key={step.number} className="relative">
+                {/* Connector line */}
+                {index < steps.length - 1 && (
+                  <div
+                    className="hidden lg:block absolute top-12 left-full w-full h-[2px] -translate-x-1/2 z-0"
+                    style={{ backgroundColor: "#27272a" }}
+                  />
+                )}
+
+                <div className="relative z-10 text-center">
+                  {/* Number badge */}
+                  <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border-2 mb-6 relative bg-[#18181b] border-[#27272a]">
+                    <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center bg-[#4B8BF5] text-white">
+                      {step.number}
+                    </span>
+                    <step.icon className="w-10 h-10 text-[#4B8BF5]" />
+                  </div>
+
+                  <h3
+                    className="text-lg font-serif mb-2"
+                    style={{ color: "#fafafa" }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "#a1a1aa" }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
