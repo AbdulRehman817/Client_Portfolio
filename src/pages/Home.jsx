@@ -1,240 +1,214 @@
-import { ArrowRight, CheckCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import {
+  Palette,
+  CheckCircle,
+  Layout,
+  Share2,
+  Megaphone,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import servicesPackages from "../assets/services-packages.png";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const services = [
+    {
+      icon: Palette,
+      title: "Personal Brand Design: Business Branding",
+      description:
+        "Personal and business brand identities built for clarity, trust, and authority.",
+      slug: "brand-design",
+    },
+    {
+      icon: Layout,
+      title: "UI/UX Design",
+      description:
+        "User-centered interface design for web and mobile apps that delights users and drives conversions.",
+      slug: "ui-ux-design",
+    },
+    {
+      icon: Share2,
+      title: "Social Media Content",
+      description:
+        "Engaging content strategies and designs that build your audience and grow your brand presence online.",
+      slug: "social-media-content",
+    },
+    {
+      icon: Megaphone,
+      title: "Digital Strategy",
+      description:
+        "Strategic planning to position your brand, reach your audience, and achieve your business goals.",
+      slug: "digital-strategy",
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <>
-      {/* Navbar */}
-      <section className="bg-transparent min-h-screen">
-        <nav
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            isScrolled
-              ? "bg-[#0D0D0D]/95 backdrop-blur-lg border-b border-[#2A2A2A] shadow-sm"
-              : "bg-transparent"
-          }`}
-        >
-          <div className="bg-gradient-to-br from-[#4B8BF5]/5 via-transparent to-transparent text-[#F2F2F2] p-5">
-            <div className="flex justify-between items-center">
-              <div className="bg-[#E53935] text-center text-[#F2F2F2] ml-[3px] text-[1.5rem] p-1 w-27.5  border-red-500 rounded-md border-0">
-                <p className="relative bottom-[10px]">Subhan</p>
-              </div>
-              <div className="flex gap-8 bg-transparent text-[#999999]">
-                <div>Services</div>
-                <div>Work</div>
-                <div>Prices</div>
-                <div>Testimonials</div>
-              </div>
-              <div className="bg-[#E53935] text-center text-[#F2F2F2] text-[1.2rem] p-1 w-27.5  border-red-500 rounded-md border-0">
-                <span className="relative bottom-[10px]">Book a call</span>
-              </div>
+      {/* ================= NAVBAR ================= */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#0D0D0D]/95 backdrop-blur-lg border-b border-[#2A2A2A]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="p-5 text-#F2F2F2]">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="bg-[#E53935] px-4 py-2 rounded-md text-lg font-semibold">
+              Subhan
             </div>
+
+            {/* Links */}
+            <div className="hidden md:flex gap-8 text-[#999999]">
+              <a href="#services" className="hover:text-white">
+                Services
+              </a>
+              <a href="#work" className="hover:text-white">
+                Work
+              </a>
+              <a href="#prices" className="hover:text-white">
+                Prices
+              </a>
+              <a href="#testimonials" className="hover:text-white">
+                Testimonials
+              </a>
+            </div>
+
+            {/* CTA */}
+            <button className="bg-[#E53935] px-4 py-2 rounded-md hover:bg-[#E53935]/90">
+              Book a call
+            </button>
           </div>
-        </nav>
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0D0D0D]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#4B8BF5]/5 via-transparent to-transparent" />
-          <div className="container px-6 pt-32 pb-20 relative z-10">
-            <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4B8BF5]/10 border border-[#4B8BF5]/20 mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#4B8BF5] animate-pulse" />
-                <span className="text-sm font-medium text-[#F2F2F2]">
-                  Available for new projects
-                </span>
-              </div>
-              <div className="space-y-6 mb-10">
-                <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl font-serif leading-tight text-[#F2F2F2]">
-                  I design & build
-                  <br />
-                  <span className="text-[#4B8BF5]">digital experiences</span>
-                  <br />
-                  that grow both personal and business brands.
-                </h1>
-                <p className="text-lg md:text-xl text-[#A0A0A0] max-w-2xl leading-relaxed">
-                  As a brand & content designer, I specialize in creating
-                  compelling visual identities, websites, and content strategies
-                  that help founders, coaches, and businesses stand out.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-4 mb-12">
-                <button className="flex items-center gap-2 px-8 py-4 bg-[#E53935] hover:bg-[#E53935]/90 text-white rounded-lg font-medium text-lg transition-colors group">
-                  Book a Free 1:1 Discovery Call
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="px-8 py-4 border border-[#2A2A2A] text-[#F2F2F2] hover:bg-[#1A1A1A] rounded-lg font-medium text-lg transition-colors">
-                  View My Work
-                </button>
-              </div>
-              <div className="flex flex-wrap gap-6">
-                {[
-                  "5+ years experience",
-                  "50+ projects delivered",
-                  "100% satisfaction",
-                ].map((point) => (
+        </div>
+      </nav>
+
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative min-h-screen flex items-center bg-[#0D0D0D] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4B8BF5]/9 via-transparent to-transparent" />
+
+        <div className="container px-6 pt-32 pb-20 relative z-10">
+          <div className="max-w-4xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4B8BF5]/10 border border-[#4B8BF5]/20 mb-8">
+              <span className="w-2 h-2 rounded-full bg-[#4B8BF5] animate-pulse" />
+              <span className="text-sm text-white">
+                Available for new projects
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#F2F2F2] mb-6">
+              I design & build <br />
+              <span className="text-[#4B8BF5]">digital experiences</span> <br />
+              that grow brands.
+            </h1>
+
+            {/* Description */}
+            <p className="text-lg md:text-xl text-[#A0A0A0] max-w-2xl mb-10">
+              I help founders, coaches, and businesses stand out with branding,
+              websites, and content that converts.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 mb-12">
+              <button className="flex items-center gap-2 px-8 py-4 bg-[#E53935] text-white rounded-lg text-lg hover:bg-[#E53935]/90 transition">
+                Book a Free Call
+                <ArrowRight className="w-5 h-5" />
+              </button>
+
+              <button className="px-8 py-4 border border-[#2A2A2A] text-white rounded-lg text-lg hover:bg-[#1A1A1A] transition">
+                View My Work
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className="flex flex-wrap gap-6">
+              {["5+ Years Experience", "50+ Projects", "100% Satisfaction"].map(
+                (item) => (
                   <div
-                    key={point}
+                    key={item}
                     className="flex items-center gap-2 text-[#A0A0A0]"
                   >
                     <CheckCircle className="w-5 h-5 text-[#4B8BF5]" />
-                    <span className="text-sm font-medium">{point}</span>
+                    <span>{item}</span>
                   </div>
-                ))}
-              </div>
+                )
+              )}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+
+      {/* ================= SERVICES ================= */}
+      <section id="services" className="py-24 bg-[#000000]/90">
+        <div className="px-6">
+          <div className="container">
+            {/* Section Header */}
+            <div className="max-w-3xl mb-16">
+              <span className="inline-block px-4 py-2 rounded-full bg-[#4B8BF5]/10 text-[#4B8BF5] text-sm font-medium mb-4">
+                What I Do
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display text-[#F2F2F2] mb-4">
+                Services tailored for{" "}
+                <span className="text-[#4B8BF5]">your success</span>
+              </h2>
+              <p className="text-lg text-[#A0A0A0] font-body">
+                I offer end-to-end solutions to help you build and grow your
+                digital presence. Each project receives my full attention and
+                expertise.
+              </p>
+            </div>
+          </div>
+
+          {/* Services Grid */}
+          <div className="w-full max-w-[1200px] mx-auto">
+            <div className="grid md:grid-cols-2 gap-6">
+              {services.map((service) => (
+                <Link
+                  key={service.title}
+                  to={`/services/${service.slug}`}
+                  className="group p-8 rounded-2xl bg-[#1A1A1A] border-[#999999]/30 border border-border hover:border-[#4B8BF5]/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#4B8BF5]/30"
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-[#4B8BF5]/10 flex items-center justify-center transition-colors">
+                      <service.icon className="w-7 h-7 text-[#4B8BF5]" />
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-[#999999] group-hover:text-[#4B8BF5] group-hover:translate-x-1 transition-all" />
+                  </div>
+                  <h3 className="text-xl font-display text-[#F2F2F2] mb-3 group-hover:text-[#4B8BF5] transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-[#A0A0A0] font-body leading-relaxed">
+                    {service.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full max-w-[1200px] mx-auto ">
+            {/* Services Packages Image */}
+            <div className="mt-16">
+              <img
+                src={servicesPackages}
+                alt="Service packages and pricing"
+                className="w-full rounded-2xl border border-border"
+              />
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
 };
 
 export default Home;
-
-// import { useState, useEffect } from "react";
-// import { Menu, X, ArrowRight, CheckCircle } from "lucide-react";
-
-// const navItems = [
-//   { label: "Services", href: "#services" },
-//   { label: "Work", href: "#work" },
-//   { label: "Pricing", href: "#pricing" },
-//   { label: "Testimonials", href: "#testimonials" },
-// ];
-
-// const Home = () => {
-//   const [isScrolled, setIsScrolled] = useState(false);
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => setIsScrolled(window.scrollY > 50);
-//     window.addEventListener("scroll", handleScroll);
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-//   return (
-//     <>
-//       {/* Navbar */}
-//       <nav
-//         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-//           isScrolled
-//             ? "bg-[#0D0D0D]/95 backdrop-blur-lg border-b border-[#2A2A2A] shadow-sm"
-//             : "bg-transparent"
-//         }`}
-//       >
-//         <div className="container  px-6 py-4">
-//           <div className="flex items-center justify-between">
-//             <a
-//               href="/"
-//               className="text-2xl font-serif px-3 py-1 bg-[#E53935] text-white rounded"
-//             >
-//               Subhan
-//             </a>
-//             <div className="hidden md:flex items-center gap-8">
-//               {navItems.map((item) => (
-//                 <a
-//                   key={item.label}
-//                   href={item.href}
-//                   className="text-[#A0A0A0] hover:text-[#F2F2F2] transition-colors duration-200 text-sm font-medium"
-//                 >
-//                   {item.label}
-//                 </a>
-//               ))}
-//             </div>
-//             <a
-//               href="#booking"
-//               className="hidden md:flex items-center gap-2 px-6 py-3 bg-[#E53935] hover:bg-[#E53935]/90 text-white rounded-lg font-medium transition-colors"
-//             >
-//               Book a Free 1:1 Discovery Call
-//             </a>
-//             <button
-//               className="md:hidden text-[#F2F2F2]"
-//               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-//             >
-//               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-//             </button>
-//           </div>
-//           {isMobileMenuOpen && (
-//             <div className="md:hidden mt-4 pb-4">
-//               {navItems.map((item) => (
-//                 <a
-//                   key={item.label}
-//                   href={item.href}
-//                   className="block py-2 text-[#A0A0A0] hover:text-[#F2F2F2]"
-//                   onClick={() => setIsMobileMenuOpen(false)}
-//                 >
-//                   {item.label}
-//                 </a>
-//               ))}
-//               <a
-//                 href="#booking"
-//                 className="mt-4 block text-center px-6 py-3 bg-[#E53935] text-white rounded-lg"
-//               >
-//                 Book a Free 1:1 Discovery Call
-//               </a>
-//             </div>
-//           )}
-//         </div>
-//       </nav>
-
-//       {/* Hero */}
-//       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0D0D0D]">
-//         <div className="absolute inset-0 bg-gradient-to-br from-[#4B8BF5]/5 via-transparent to-transparent" />
-//         <div className="container  px-6 pt-32 pb-20 relative z-10">
-//           <div className="max-w-4xl">
-//             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4B8BF5]/10 border border-[#4B8BF5]/20 mb-8">
-//               <span className="w-2 h-2 rounded-full bg-[#4B8BF5] animate-pulse" />
-//               <span className="text-sm font-medium text-[#F2F2F2]">
-//                 Available for new projects
-//               </span>
-//             </div>
-//             <div className="space-y-6 mb-10">
-//               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-[#F2F2F2]">
-//                 I design & build
-//                 <br />
-//                 <span className="text-[#4B8BF5]">digital experiences</span>
-//                 <br />
-//                 that grow both personal and business brands.
-//               </h1>
-//               <p className="text-lg md:text-xl text-[#A0A0A0] max-w-2xl leading-relaxed">
-//                 As a brand & content designer, I specialize in creating
-//                 compelling visual identities, websites, and content strategies
-//                 that help founders, coaches, and businesses stand out.
-//               </p>
-//             </div>
-//             <div className="flex flex-wrap gap-4 mb-12">
-//               <button className="flex items-center gap-2 px-8 py-4 bg-[#E53935] hover:bg-[#E53935]/90 text-white rounded-lg font-medium text-lg transition-colors group">
-//                 Book a Free 1:1 Discovery Call
-//                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-//               </button>
-//               <button className="px-8 py-4 border border-[#2A2A2A] text-[#F2F2F2] hover:bg-[#1A1A1A] rounded-lg font-medium text-lg transition-colors">
-//                 View My Work
-//               </button>
-//             </div>
-//             <div className="flex flex-wrap gap-6">
-//               {[
-//                 "5+ years experience",
-//                 "50+ projects delivered",
-//                 "100% satisfaction",
-//               ].map((point) => (
-//                 <div
-//                   key={point}
-//                   className="flex items-center gap-2 text-[#A0A0A0]"
-//                 >
-//                   <CheckCircle className="w-5 h-5 text-[#4B8BF5]" />
-//                   <span className="text-sm font-medium">{point}</span>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
-// export default Home;
