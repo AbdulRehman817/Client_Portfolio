@@ -10,9 +10,13 @@ import {
   Lightbulb,
   Paintbrush,
   Rocket,
+  ArrowUpRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import servicesPackages from "../assets/services-packages.png";
+import portfolio1 from "../assets/portfolio-1.jpg";
+import portfolio2 from "../assets/portfolio-2.jpg";
+import portfolio3 from "../assets/portfolio-3.jpg";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -79,6 +83,27 @@ const Home = () => {
     },
   ];
 
+  const projects = [
+    {
+      title: "E-Commerce Platform",
+      category: "Web Development • UI/UX",
+      image: portfolio1,
+      description: "Full-stack e-commerce solution with custom checkout flow",
+    },
+    {
+      title: "SaaS Dashboard",
+      category: "Product Design • Development",
+      image: portfolio2,
+      description: "Analytics dashboard for a growing startup",
+    },
+    {
+      title: "Brand Identity",
+      category: "Branding • Strategy",
+      image: portfolio3,
+      description: "Complete rebrand for a tech company",
+    },
+  ];
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -98,7 +123,7 @@ const Home = () => {
         <div className="p-5 text-#F2F2F2]">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div className="bg-[#E53935] px-4 py-2 rounded-md text-lg font-semibold">
+            <div className="bg-[#E53935] ml-[4px] px-4 py-2 rounded-md text-lg font-semibold">
               Subhan
             </div>
 
@@ -245,7 +270,7 @@ const Home = () => {
 
       {/* ================= HOW IT WORKS ================= */}
       <section id="process" className="py-24 bg-[#0a0a0a]">
-        <div className="container mx-auto px-6">
+        <div className="px-6">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
             <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
@@ -262,15 +287,12 @@ const Home = () => {
           </div>
 
           {/* Steps */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1500px]">
             {steps.map((step, index) => (
               <div key={step.number} className="relative">
                 {/* Connector line */}
                 {index < steps.length - 1 && (
-                  <div
-                    className="hidden lg:block absolute top-12 left-full w-full h-[2px] -translate-x-1/2 z-0"
-                    style={{ backgroundColor: "#27272a" }}
-                  />
+                  <div className="hidden lg:block absolute top-12 left-full w-full h-[2px] -translate-x-1/2 z-0 bg-[#27272a]" />
                 )}
 
                 <div className="relative z-10 text-center">
@@ -293,6 +315,90 @@ const Home = () => {
                     style={{ color: "#a1a1aa" }}
                   >
                     {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PORTFOLIO ================= */}
+      <section
+        id="work"
+        className="py-24"
+        style={{ backgroundColor: "#0A0A0B" }}
+      >
+        <div className="px-6">
+          {/* Section Header */}
+          <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+            <div>
+              <span className="inline-block bg-[#4B8BF5]/10 px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5]">
+                My Work
+              </span>
+              <h2
+                className="text-3xl md:text-4xl font-serif"
+                style={{ color: "#FAFAFA" }}
+              >
+                Featured <span className="text-[#4B8BF5]">projects</span>
+              </h2>
+            </div>
+            <p className="max-w-md mt-4 md:mt-0 text-[#A1A1AA]">
+              A selection of recent work I'm proud of. Each project represents a
+              unique challenge and solution.
+            </p>
+          </div>
+
+          {/* Projects Grid */}
+          <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div key={project.title} className="group cursor-pointer">
+                {/* Image Container */}
+                <div
+                  className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-6"
+                  style={{ backgroundColor: "#1A1A1D" }}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(10, 10, 11, 0.6), transparent, transparent)",
+                    }}
+                  />
+
+                  {/* Hover Icon */}
+                  <div
+                    className="absolute bottom-4 right-4 w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                    style={{ backgroundColor: "#A855F7" }}
+                  >
+                    <ArrowUpRight
+                      className="w-5 h-5"
+                      style={{ color: "#FFFFFF" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Project Info */}
+                <div>
+                  <span
+                    className="text-sm mb-2 block"
+                    style={{ color: "#A1A1AA" }}
+                  >
+                    {project.category}
+                  </span>
+                  <h3
+                    className="text-xl font-serif mb-2 transition-colors group-hover:text-[#A855F7]"
+                    style={{ color: "#FAFAFA" }}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="text-sm" style={{ color: "#A1A1AA" }}>
+                    {project.description}
                   </p>
                 </div>
               </div>
