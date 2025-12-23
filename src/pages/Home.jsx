@@ -10,6 +10,7 @@ import {
   Lightbulb,
   Paintbrush,
   Rocket,
+  Check,
   ArrowUpRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -101,6 +102,55 @@ const Home = () => {
       category: "Branding • Strategy",
       image: portfolio3,
       description: "Complete rebrand for a tech company",
+    },
+  ];
+
+  const plans = [
+    {
+      name: "Starter",
+      description: "Perfect for small projects and MVPs",
+      price: "$2,500",
+      duration: "starting at",
+      features: [
+        "Single page website or landing page",
+        "Mobile responsive design",
+        "Basic SEO setup",
+        "2 rounds of revisions",
+        "1 week delivery",
+      ],
+      popular: false,
+    },
+    {
+      name: "Professional",
+      description: "Best for growing businesses",
+      price: "$5,000",
+      duration: "starting at",
+      features: [
+        "Multi-page website (up to 5 pages)",
+        "Custom UI/UX design",
+        "CMS integration",
+        "Advanced SEO optimization",
+        "3 rounds of revisions",
+        "2-3 weeks delivery",
+        "30 days support included",
+      ],
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      description: "For complex web applications",
+      price: "Custom",
+      duration: "quote",
+      features: [
+        "Full web application development",
+        "Custom features & integrations",
+        "Database design & setup",
+        "User authentication",
+        "API development",
+        "Unlimited revisions",
+        "Priority support",
+      ],
+      popular: false,
     },
   ];
 
@@ -372,10 +422,7 @@ const Home = () => {
                   />
 
                   {/* Hover Icon */}
-                  <div
-                    className="absolute bottom-4 right-4 w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-                    style={{ backgroundColor: "#A855F7" }}
-                  >
+                  <div className="absolute bottom-4 bg-[#4B8BF5] right-4 w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     <ArrowUpRight
                       className="w-5 h-5"
                       style={{ color: "#FFFFFF" }}
@@ -404,6 +451,121 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+      {/* Pricing Section */}
+
+      <section
+        id="pricing"
+        className="py-24"
+        style={{ backgroundColor: "#1A1A1D" }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <span
+              className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
+              style={{
+                backgroundColor: "rgba(168, 85, 247, 0.1)",
+                color: "#4B8BF5",
+              }}
+            >
+              Pricing
+            </span>
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{ color: "#FAFAFA" }}
+            >
+              Transparent pricing for{" "}
+              <span style={{ color: "#4B8BF5" }}>every budget</span>
+            </h2>
+            <p className="text-lg" style={{ color: "#A1A1AA" }}>
+              Choose a package that fits your needs, or let's discuss a custom
+              solution.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`relative p-8 rounded-2xl transition-all duration-300 bg-transparent border-2 ${
+                  plan.popular
+                    ? "border-[#4B8BF5] shadow-[0_0_12px_#4B8BF5]"
+                    : "border-[#4B8BF5] shadow-none"
+                } hover:-translate-y-2  hover:shadow-[0_0_12px_#4B8BF5]`}
+              >
+                {plan.popular && (
+                  <span
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold"
+                    style={{ backgroundColor: "#4B8BF5", color: "#FFFFFF" }}
+                  >
+                    Most Popular
+                  </span>
+                )}
+
+                <div className="mb-6">
+                  <h3
+                    className="text-xl font-bold mb-2"
+                    style={{ color: "#FAFAFA" }}
+                  >
+                    {plan.name}
+                  </h3>
+                  <p className="text-sm" style={{ color: "#A1A1AA" }}>
+                    {plan.description}
+                  </p>
+                </div>
+
+                <div className="mb-8">
+                  <span
+                    className="text-4xl font-bold"
+                    style={{ color: "#FAFAFA" }}
+                  >
+                    {plan.price}
+                  </span>
+                  <span className="text-sm ml-2" style={{ color: "#A1A1AA" }}>
+                    {plan.duration}
+                  </span>
+                </div>
+
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3">
+                      <Check
+                        className="w-5 h-5 flex-shrink-0 mt-0.5"
+                        style={{ color: "#4B8BF5" }}
+                      />
+                      <span className="text-sm" style={{ color: "#A1A1AA" }}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className="w-full py-3 px-6 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 group"
+                  style={{
+                    backgroundColor: plan.popular ? "#4B8BF5" : "transparent",
+                    color: plan.popular ? "#FFFFFF" : "#4B8BF5",
+                    border: plan.popular ? "none" : "1px solid #4B8BF5",
+                  }}
+                >
+                  Get Started
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm mt-12" style={{ color: "#A1A1AA" }}>
+            Need something different?{" "}
+            <a
+              href="#booking"
+              style={{ color: "#4B8BF5" }}
+              className="hover:underline"
+            >
+              Schedule a call
+            </a>
+          </p>
         </div>
       </section>
     </>
