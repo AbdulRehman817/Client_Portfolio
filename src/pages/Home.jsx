@@ -12,6 +12,12 @@ import {
   Rocket,
   Check,
   ArrowUpRight,
+  Quote,
+  Calendar,
+  Clock,
+  Video,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import servicesPackages from "../assets/services-packages.png";
@@ -21,6 +27,62 @@ import portfolio3 from "../assets/portfolio-3.jpg";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    return { firstDay, daysInMonth };
+  };
+
+  const { firstDay, daysInMonth } = getDaysInMonth(currentMonth);
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  const emptyDays = Array.from({ length: firstDay }, (_, i) => i);
+
+  const handleBooking = () => {
+    if (selectedDate && selectedTime) {
+      alert(
+        `Booking confirmed for ${selectedDate.toDateString()} at ${selectedTime}`
+      );
+    }
+  };
+
+  const prevMonth = () =>
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
+    );
+  const nextMonth = () =>
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
+    );
+
+  const testimonials = [
+    {
+      quote:
+        "Working with him was a game-changer for our startup. He understood our vision and delivered beyond expectations.",
+      author: "Sarah Chen",
+      role: "CEO, TechVentures",
+      avatar: "SC",
+    },
+    {
+      quote:
+        "Incredible attention to detail and truly cares about the end result. The process was smooth from start to finish.",
+      author: "Marcus Johnson",
+      role: "Founder, StartupLab",
+      avatar: "MJ",
+    },
+    {
+      quote:
+        "Professional, creative, and efficient. He delivered a website that perfectly captures our brand identity.",
+      author: "Emily Rodriguez",
+      role: "Marketing Director, GrowthCo",
+      avatar: "ER",
+    },
+  ];
 
   const services = [
     {
@@ -153,7 +215,15 @@ const Home = () => {
       popular: false,
     },
   ];
-
+  const timeSlots = [
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM",
+  ];
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -326,7 +396,7 @@ const Home = () => {
             <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
               How It Works
             </span>
-            <h2 className="text-3xl md:text-4xl font-serif mb-4 text-[#fafafa]">
+            <h2 className="text-3xl md:text-4xl font-serif mb-4 text-[#4B8BF5]">
               A simple process for{" "}
               <span className="text-[#4B8BF5]">great results</span>
             </h2>
@@ -356,7 +426,7 @@ const Home = () => {
 
                   <h3
                     className="text-lg font-serif mb-2"
-                    style={{ color: "#fafafa" }}
+                    style={{ color: "#4B8BF5" }}
                   >
                     {step.title}
                   </h3>
@@ -388,7 +458,7 @@ const Home = () => {
               </span>
               <h2
                 className="text-3xl md:text-4xl font-serif"
-                style={{ color: "#FAFAFA" }}
+                style={{ color: "#4B8BF5" }}
               >
                 Featured <span className="text-[#4B8BF5]">projects</span>
               </h2>
@@ -439,8 +509,8 @@ const Home = () => {
                     {project.category}
                   </span>
                   <h3
-                    className="text-xl font-serif mb-2 transition-colors group-hover:text-[#A855F7]"
-                    style={{ color: "#FAFAFA" }}
+                    className="text-xl font-serif mb-2 transition-colors group-hover:text-[#4B8BF5]"
+                    style={{ color: "#4B8BF5" }}
                   >
                     {project.title}
                   </h3>
@@ -462,18 +532,12 @@ const Home = () => {
       >
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <span
-              className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{
-                backgroundColor: "rgba(168, 85, 247, 0.1)",
-                color: "#4B8BF5",
-              }}
-            >
+            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
               Pricing
             </span>
             <h2
               className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ color: "#FAFAFA" }}
+              style={{ color: "#4B8BF5" }}
             >
               Transparent pricing for{" "}
               <span style={{ color: "#4B8BF5" }}>every budget</span>
@@ -488,11 +552,11 @@ const Home = () => {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative p-8 rounded-2xl transition-all duration-300 bg-transparent border-2 ${
+                className={`relative p-8 rounded-2xl border-[#999999]/30 transition-all duration-300 bg-transparent border-1 ${
                   plan.popular
                     ? "border-[#4B8BF5] shadow-[0_0_12px_#4B8BF5]"
-                    : "border-[#4B8BF5] shadow-none"
-                } hover:-translate-y-2  hover:shadow-[0_0_12px_#4B8BF5]`}
+                    : " shadow-none"
+                } hover:-translate-y-2 hover:border-[#4B8BF5] hover:shadow-[0_0_12px_#4B8BF5]`}
               >
                 {plan.popular && (
                   <span
@@ -506,7 +570,7 @@ const Home = () => {
                 <div className="mb-6">
                   <h3
                     className="text-xl font-bold mb-2"
-                    style={{ color: "#FAFAFA" }}
+                    style={{ color: "#4B8BF5" }}
                   >
                     {plan.name}
                   </h3>
@@ -518,7 +582,7 @@ const Home = () => {
                 <div className="mb-8">
                   <span
                     className="text-4xl font-bold"
-                    style={{ color: "#FAFAFA" }}
+                    style={{ color: "#4B8BF5" }}
                   >
                     {plan.price}
                   </span>
@@ -566,6 +630,259 @@ const Home = () => {
               Schedule a call
             </a>
           </p>
+        </div>
+      </section>
+
+      {/* ================= TESTIMONIALS ================= */}
+
+      <section
+        id="testimonials"
+        className="py-24"
+        style={{ backgroundColor: "#1A1A1D" }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
+              Testimonials
+            </span>
+            <h2
+              className="text-3xl md:text-4xl font-bold"
+              style={{ color: "#4B8BF5" }}
+            >
+              What clients <span style={{ color: "#4B8BF5" }}>say</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {testimonials.map((testimonial) => (
+              <div
+                key={testimonial.author}
+                className="p-8 rounded-2xl border-[#999999]/30  bg-transparent border-1 border-solid   hover:border-[#4B8BF5]/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#4B8BF5]/30 "
+              >
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-[#4B8BF5]/10">
+                  <Quote className="w-5 h-5" style={{ color: "#4B8BF5" }} />
+                </div>
+
+                <p
+                  className="leading-relaxed mb-8"
+                  style={{ color: "#FAFAFA" }}
+                >
+                  "{testimonial.quote}"
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#4B8BF5]/10">
+                    <span
+                      className="text-sm font-bold"
+                      style={{ color: "#4B8BF5" }}
+                    >
+                      {testimonial.avatar}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{ color: "#4B8BF5" }}>
+                      {testimonial.author}
+                    </div>
+                    <div className="text-sm" style={{ color: "#A1A1AA" }}>
+                      {testimonial.role}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= BOOK A CALL ================= */}
+      <section
+        id="booking"
+        className="py-24"
+        style={{ backgroundColor: "#0A0A0B" }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 text-[#4B8BF5] bg-[#4B8BF5]/10">
+              Book a Call
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#4B8BF5]">
+              Let's discuss your{" "}
+              <span style={{ color: "#4B8BF5" }}>project</span>
+            </h2>
+            <p className="text-lg" style={{ color: "#A1A1AA" }}>
+              Schedule a free 30-minute discovery call to explore how we can
+              work together.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            {/* Calendar */}
+            <div
+              className="p-6 rounded-2xl"
+              style={{
+                backgroundColor: "#1A1A1D",
+                border: "1px solid #27272A",
+              }}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <button
+                  onClick={prevMonth}
+                  className="p-2 rounded-lg hover:opacity-80"
+                  style={{ backgroundColor: "#27272A" }}
+                >
+                  <ChevronLeft
+                    className="w-5 h-5"
+                    style={{ color: "#FAFAFA" }}
+                  />
+                </button>
+                <h3 className="font-semibold" style={{ color: "#FAFAFA" }}>
+                  {currentMonth.toLocaleDateString("en-US", {
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </h3>
+                <button
+                  onClick={nextMonth}
+                  className="p-2 rounded-lg hover:opacity-80"
+                  style={{ backgroundColor: "#27272A" }}
+                >
+                  <ChevronRight
+                    className="w-5 h-5"
+                    style={{ color: "#FAFAFA" }}
+                  />
+                </button>
+              </div>
+
+              <div
+                className="grid grid-cols-7 gap-2 text-center text-sm mb-2"
+                style={{ color: "#A1A1AA" }}
+              >
+                {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
+                  <div key={day} className="py-2">
+                    {day}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-2">
+                {emptyDays.map((_, i) => (
+                  <div key={`empty-${i}`} />
+                ))}
+                {days.map((day) => {
+                  const date = new Date(
+                    currentMonth.getFullYear(),
+                    currentMonth.getMonth(),
+                    day
+                  );
+                  const isSelected =
+                    selectedDate?.toDateString() === date.toDateString();
+                  const isPast =
+                    date < new Date(new Date().setHours(0, 0, 0, 0));
+
+                  return (
+                    <button
+                      key={day}
+                      onClick={() => !isPast && setSelectedDate(date)}
+                      disabled={isPast}
+                      className="p-2 rounded-lg text-sm font-medium transition-all"
+                      style={{
+                        backgroundColor: isSelected ? "#4B8BF5" : "transparent",
+                        color: isPast
+                          ? "#52525B"
+                          : isSelected
+                          ? "#FFFFFF"
+                          : "#FAFAFA",
+                        cursor: isPast ? "not-allowed" : "pointer",
+                      }}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Time Slots */}
+            <div
+              className="p-6 rounded-2xl"
+              style={{
+                backgroundColor: "#1A1A1D",
+                border: "1px solid #27272A",
+              }}
+            >
+              <h3 className="font-semibold mb-6" style={{ color: "#FAFAFA" }}>
+                {selectedDate
+                  ? `Available times for ${selectedDate.toLocaleDateString()}`
+                  : "Select a date first"}
+              </h3>
+
+              <div className="grid grid-cols-2 gap-3">
+                {timeSlots.map((time) => {
+                  const isSelected = selectedTime === time;
+                  return (
+                    <button
+                      key={time}
+                      onClick={() => setSelectedTime(time)}
+                      disabled={!selectedDate}
+                      className="py-3 px-4 rounded-lg text-sm font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: isSelected ? "#4B8BF5" : "#27272A",
+                        color: "#FAFAFA",
+                        opacity: !selectedDate ? 0.5 : 1,
+                        cursor: !selectedDate ? "not-allowed" : "pointer",
+                      }}
+                    >
+                      {time}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedDate && selectedTime && (
+                <button
+                  onClick={handleBooking}
+                  className="w-full mt-6 py-3 px-6 rounded-lg font-semibold transition-all hover:opacity-90"
+                  style={{ backgroundColor: "#4B8BF5", color: "#FFFFFF" }}
+                >
+                  Confirm Booking
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Info Cards */}
+          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6 mt-12">
+            {[
+              {
+                icon: Clock,
+                title: "30 Minutes",
+                desc: "Quick discovery call",
+              },
+              { icon: Video, title: "Video Call", desc: "Via Google Meet" },
+              { icon: Calendar, title: "Free", desc: "No obligation" },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="flex items-center gap-4 p-4 rounded-xl"
+                style={{
+                  backgroundColor: "#1A1A1D",
+                  border: "1px solid #27272A",
+                }}
+              >
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#4B8BF5]/10">
+                  <Icon className="w-5 h-5" style={{ color: "#4B8BF5" }} />
+                </div>
+                <div>
+                  <div className="font-semibold" style={{ color: "#4B8BF5" }}>
+                    {title}
+                  </div>
+                  <div className="text-sm" style={{ color: "#A1A1AA" }}>
+                    {desc}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
