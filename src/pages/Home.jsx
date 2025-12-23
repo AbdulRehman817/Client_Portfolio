@@ -18,6 +18,10 @@ import {
   Video,
   ChevronLeft,
   ChevronRight,
+  Mail,
+  Linkedin,
+  Twitter,
+  Github,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import servicesPackages from "../assets/services-packages.png";
@@ -885,6 +889,160 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* FOOTER AND CTA SECTION*/}
+      <div>
+        {/* CTA Section */}
+        <section className="py-24" style={{ backgroundColor: "#E5E5E5" }}>
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2
+                className="text-4xl md:text-5xl font-bold mb-6"
+                style={{ color: "#1A1A1A" }}
+              >
+                Ready to bring your idea to life?
+              </h2>
+              <p
+                className="text-lg md:text-xl mb-8"
+                style={{ color: "#525252" }}
+              >
+                Let's chat about your project and see how I can help you achieve
+                your goals. No commitment required — just a friendly
+                conversation.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  className="px-8 py-4 rounded-lg font-semibold transition-all hover:opacity-90 flex items-center gap-2"
+                  style={{ backgroundColor: "#4B8BF5", color: "#FFFFFF" }}
+                >
+                  Schedule a Call
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+
+                <button
+                  className="px-8 py-4 rounded-lg font-semibold transition-all hover:bg-gray-100 flex items-center gap-2"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    color: "#1A1A1A",
+                    border: "2px solid #D4D4D4",
+                  }}
+                >
+                  <Mail className="w-5 h-5" />
+                  hello@yourname.com
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-16" style={{ backgroundColor: "#1A1A1A" }}>
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-3 gap-12">
+              {/* Brand Column */}
+              <div>
+                <h3
+                  className="text-2xl font-bold mb-4"
+                  style={{ color: "#FFFFFF" }}
+                >
+                  SUBHAN<span style={{ color: "#4B8BF5" }}>.</span>
+                </h3>
+                <p
+                  className="mb-6"
+                  style={{ color: "#A3A3A3", lineHeight: "1.7" }}
+                >
+                  Independent designer & developer helping businesses create
+                  impactful digital experiences. Based in [Your City], working
+                  with clients worldwide.
+                </p>
+
+                {/* Social Links */}
+                <div className="flex gap-4">
+                  <button
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:bg-gray-800"
+                    style={{ backgroundColor: "#27272A" }}
+                  >
+                    <Linkedin
+                      className="w-5 h-5"
+                      style={{ color: "#FAFAFA" }}
+                    />
+                  </button>
+                  <button
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:bg-gray-800"
+                    style={{ backgroundColor: "#27272A" }}
+                  >
+                    <Twitter className="w-5 h-5" style={{ color: "#FAFAFA" }} />
+                  </button>
+                  <button
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:bg-gray-800"
+                    style={{ backgroundColor: "#27272A" }}
+                  >
+                    <Github className="w-5 h-5" style={{ color: "#FAFAFA" }} />
+                  </button>
+                  <button
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:bg-gray-800"
+                    style={{ backgroundColor: "#27272A" }}
+                  >
+                    <Mail className="w-5 h-5" style={{ color: "#FAFAFA" }} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Services Column */}
+              <div>
+                <h4
+                  className="text-lg font-semibold mb-6"
+                  style={{ color: "#FFFFFF" }}
+                >
+                  Services
+                </h4>
+                <ul className="space-y-3">
+                  {[
+                    "Brand Design",
+                    "UI/UX Design",
+                    "Web Development",
+                    "Digital Strategy",
+                  ].map((service) => (
+                    <li key={service}>
+                      <a
+                        href="#"
+                        className="transition-colors hover:text-white"
+                        style={{ color: "#A3A3A3" }}
+                      >
+                        {service}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Quick Links Column */}
+              <div>
+                <h4
+                  className="text-lg font-semibold mb-6"
+                  style={{ color: "#FFFFFF" }}
+                >
+                  Quick Links
+                </h4>
+                <ul className="space-y-3">
+                  {["About", "Portfolio", "Pricing", "Contact"].map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="transition-colors hover:text-white"
+                        style={{ color: "#A3A3A3" }}
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
     </>
   );
 };
